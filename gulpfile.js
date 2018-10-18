@@ -34,7 +34,7 @@ var gulp            = require('gulp'),
             fonts: 'src/fonts/**/*.*'
         },
         watch: { 
-            pug: 'src/**/*.pug',
+            pug: 'src/*.pug',
             js: 'src/js/**/*.js',
             style: 'src/sass/**/*.sass',
             img: 'src/img/**/*.*',
