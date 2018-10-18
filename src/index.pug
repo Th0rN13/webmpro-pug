@@ -5,19 +5,13 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         link(rel="stylesheet", href="css/style.css")
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
         script(src="https://code.jquery.com/jquery-3.3.1.min.js")
         script(src="/js/script.js")
         title Webm.Pro
     body
-        .preloader
-            .preloader-circle            
-            .preloader-lines
-                .line.line1 L
-                .line.line2 O
-                .line.line3 A
-                .line.line4 D
-                .line.line5 I
-                .line.line6 N
-                .line.line7 G
-                
-          
+        @@include('tpl/preloader.pug')
+        @@include('tpl/header.pug')
+
+        div текст
+        @@include('tpl/footer.pug')

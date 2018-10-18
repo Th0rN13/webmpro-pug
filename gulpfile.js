@@ -8,6 +8,7 @@ var gulp            = require('gulp'),
     sass            = require('gulp-sass'),
     sourcemaps      = require('gulp-sourcemaps'),
     rigger          = require('gulp-rigger'),
+    fileinclude     = require('gulp-file-include'),
     cssmin          = require('gulp-minify-css'),
     imagemin        = require('gulp-imagemin'),
     pngquant        = require('imagemin-pngquant'),
@@ -54,14 +55,16 @@ var gulp            = require('gulp'),
 
     gulp.task('html:build', function () {
         gulp.src(path.src.pug) 
-            .pipe(pug())
-            .pipe(rigger()) 
+            .pipe(plumber())
+            .pipe(fileinclude({indent: true}))
+            .pipe(pug())            
             .pipe(gulp.dest(path.build.html)) 
             .pipe(reload({stream: true})); 
     });
 
     gulp.task('js:build', function () {
         gulp.src(path.src.js) 
+            .pipe(plumber())
             .pipe(rigger()) 
             .pipe(sourcemaps.init()) 
             .pipe(uglify()) 
