@@ -14,6 +14,7 @@ var gulp            = require('gulp'),
     rimraf          = require('rimraf'),
     browserSync     = require("browser-sync"),
     pug             = require('gulp-pug'),
+    plumber         = require('gulp-plumber'),
     reload          = browserSync.reload;
 
     var path = {
@@ -51,21 +52,6 @@ var gulp            = require('gulp'),
         logPrefix: "FrontEnd"
     };
 
-    function wrapPipe(taskFn) {
-        return function(done) {
-          var onSuccess = function() {
-            done();
-          };
-          var onError = function(err) {
-            done(err);
-          }
-          var outStream = taskFn(onSuccess, onError);
-          if(outStream && typeof outStream.on === 'function') {
-            outStream.on('end', onSuccess);
-          }
-        }
-      }
-
     gulp.task('html:build', function () {
         gulp.src(path.src.pug) 
             .pipe(pug())
@@ -84,27 +70,17 @@ var gulp            = require('gulp'),
             .pipe(reload({stream: true})); 
     });
 
-    // gulp.task('style:build', function () {
-    //     gulp.src(path.src.style) 
-    //         .pipe(sourcemaps.init()) 
-    //         .pipe(sass()) 
-    //         .pipe(prefixer()) 
-    //         .pipe(cssmin()) 
-    //         .pipe(sourcemaps.write())
-    //         .pipe(gulp.dest(path.build.css)) 
-    //         .pipe(reload({stream: true}));
-    // });
-
-    gulp.task('style:build', wrapPipe(function (success, error) {
-        return gulp.src(path.src.style) 
-            .pipe(sourcemaps.init().on('error', error)) 
-            .pipe(sass().on('error', error)) 
-            .pipe(prefixer().on('error', error)) 
-            .pipe(cssmin().on('error', error)) 
-            .pipe(sourcemaps.write().on('error', error))
-            .pipe(gulp.dest(path.build.css).on('error', error)) 
+    gulp.task('style:build', function () {
+        gulp.src(path.src.style) 
+            .pipe(plumber())
+            .pipe(sourcemaps.init()) 
+            .pipe(sass()) 
+            .pipe(prefixer()) 
+            .pipe(cssmin()) 
+            .pipe(sourcemaps.write())
+            .pipe(gulp.dest(path.build.css)) 
             .pipe(reload({stream: true}));
-    }));
+    });
 
     gulp.task('image:build', function () {
         gulp.src(path.src.img) 
@@ -136,7 +112,7 @@ var gulp            = require('gulp'),
             gulp.start('html:build');
         });
         watch([path.watch.style], function(event, cb) {
-            setTimeout(function(){gulp.start('style:build')},500);
+            setTimeout(function(){gulp.start('style:build')}, 500);
         });
         watch([path.watch.js], function(event, cb) {
             gulp.start('js:build');

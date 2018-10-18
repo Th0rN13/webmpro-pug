@@ -43,16 +43,14 @@
             height: $preloader-line-height
             display: inline-block
             margin: 0 $preloader-margin
+            color: $light-color
             animation: opacity 1s infinite ease-in-out
-            background-color: $light-color
-        .line1, .line9
-            animation-delay: 800ms;
-        .line2, .line8
-            animation-delay: 600ms;
-        .line3, .line7
-            animation-delay: 400ms;
-        .line4, .line6
-            animation-delay: 200ms;
+        .line1, .line7
+            animation-delay: 750ms
+        .line2, .line6
+            animation-delay: 500ms
+        .line3, .line5
+            animation-delay: 250ms
 
 
 @keyframes spin
@@ -65,7 +63,7 @@
     0% 
         opacity: 1
     50%
-        opacity: 0
+        opacity: 0.5
     100%
         opacity: 1
     
