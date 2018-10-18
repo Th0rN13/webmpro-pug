@@ -1,0 +1,36 @@
+/* Preloader styles */
+
+.preloader
+    height: 100vh
+    width: 100vw
+    background-color: $primary-color
+    .preloader-circle
+        position: absolute
+        left: calc(50% - 50px)
+        top: calc(50% - 50px)
+        width: $preloader-md-circle
+        height: $preloader-md-circle
+        border: 2px solid transparent
+        border-top-color: $light-color
+        border-radius: 50%        
+        animation: spin 1s infinite
+        &:after
+            // position: relative
+            // content: ""
+            // width: 90px
+            // height: 90px  
+            // border: 2px solid transparent
+            // border-top-color: $light-color
+            // border-radius: 50%        
+            // animation: spin 1.7s infinite
+        &:before
+            content: ""
+            width: 115px
+            height: 115px
+
+@keyframes spin
+    from        
+        transform: rotate(0deg)    
+    to
+        transform: rotate(360deg)
+    

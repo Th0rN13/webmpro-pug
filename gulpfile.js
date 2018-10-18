@@ -34,7 +34,7 @@ var gulp            = require('gulp'),
         watch: { 
             pug: 'src/**/*.pug',
             js: 'src/js/**/*.js',
-            style: 'src/style/**/*.sass',
+            style: 'src/sass/**/*.sass',
             img: 'src/img/**/*.*',
             fonts: 'src/fonts/**/*.*'
         },
@@ -110,7 +110,7 @@ var gulp            = require('gulp'),
             gulp.start('html:build');
         });
         watch([path.watch.style], function(event, cb) {
-            gulp.start('style:build');
+            setTimeout(function(){gulp.start('style:build')},500);
         });
         watch([path.watch.js], function(event, cb) {
             gulp.start('js:build');
