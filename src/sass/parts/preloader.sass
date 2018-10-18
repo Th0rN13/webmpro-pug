@@ -4,33 +4,68 @@
     height: 100vh
     width: 100vw
     background-color: $primary-color
-    .preloader-circle
+    %preloader-circle-common
         position: absolute
-        left: calc(50% - 50px)
-        top: calc(50% - 50px)
-        width: $preloader-md-circle
-        height: $preloader-md-circle
-        border: 2px solid transparent
+        border: 3px solid transparent
         border-top-color: $light-color
-        border-radius: 50%        
-        animation: spin 1s infinite
+        border-radius: 50%
+    .preloader-circle
+        left: calc(50% - #{$preloader-lg-circle/2})
+        top: calc(50% - #{$preloader-lg-circle/2})
+        width: $preloader-lg-circle
+        height: $preloader-lg-circle        
+        animation: spin 2.1s linear infinite
+        @extend %preloader-circle-common
         &:after
-            // position: relative
-            // content: ""
-            // width: 90px
-            // height: 90px  
-            // border: 2px solid transparent
-            // border-top-color: $light-color
-            // border-radius: 50%        
-            // animation: spin 1.7s infinite
+            content: ""
+            left: ($preloader-lg-circle - $preloader-sm-circle)/2
+            top: ($preloader-lg-circle - $preloader-sm-circle)/2
+            right: ($preloader-lg-circle - $preloader-sm-circle)/2
+            bottom: ($preloader-lg-circle - $preloader-sm-circle)/2
+            animation: spin 1.3s linear infinite
+            @extend %preloader-circle-common            
         &:before
             content: ""
-            width: 115px
-            height: 115px
+            left: ($preloader-lg-circle - $preloader-md-circle)/2
+            top: ($preloader-lg-circle - $preloader-md-circle)/2
+            right: ($preloader-lg-circle - $preloader-md-circle)/2
+            bottom: ($preloader-lg-circle - $preloader-md-circle)/2
+            animation: spin 1.7s linear infinite
+            @extend %preloader-circle-common
+    .preloader-lines
+        position: absolute
+        left: calc(50% - #{$preloader-width/2})
+        top: calc(50% + #{$preloader-lg-circle})
+        width: $preloader-width
+        height: $preloader-line-height
+        .line
+            width: $preloader-line-width
+            height: $preloader-line-height
+            display: inline-block
+            margin: 0 $preloader-margin
+            animation: opacity 1s infinite ease-in-out
+            background-color: $light-color
+        .line1, .line9
+            animation-delay: 800ms;
+        .line2, .line8
+            animation-delay: 600ms;
+        .line3, .line7
+            animation-delay: 400ms;
+        .line4, .line6
+            animation-delay: 200ms;
+
 
 @keyframes spin
-    from        
+    0%
         transform: rotate(0deg)    
-    to
+    100%
         transform: rotate(360deg)
+    
+@keyframes opacity
+    0% 
+        opacity: 1
+    50%
+        opacity: 0
+    100%
+        opacity: 1
     
